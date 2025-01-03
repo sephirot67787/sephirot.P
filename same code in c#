@@ -1,0 +1,250 @@
+class Program
+{
+
+    static void Main()
+    {
+        int code = 0;
+        SelectRole(code);
+
+    }
+
+    static int CodeCreate()
+    {
+        int choice;
+        int code = 0;
+        Console.WriteLine("Ah, I see! I thought I hadn't seen you around before. Are you new? What's your name?");
+        string name = Console.ReadLine() ?? "Guest";
+        Console.WriteLine($"{name}, eh? That's a great name! How old are you?");
+        string age = Console.ReadLine() ?? "unknown";
+        Console.WriteLine($"So you're {age} years old, huh? You look great for your age.");
+        Console.WriteLine("Alright, I'll give you your code now. Please don't lose it.");
+
+        Random rand = new Random();
+        do
+        {
+            code = rand.Next(1000000, 99999999);
+            Console.WriteLine($"Here's your code: {code}");
+            Console.WriteLine($"Just to confirm, your code is: {code}");
+            Console.WriteLine("Do you like it? Choose: 1 - Yes, 2 - No");
+
+            string input = Console.ReadLine() ?? string.Empty;
+            if (int.TryParse(input, out choice) && (choice == 1 || choice == 2))
+            {
+                if (choice == 1)
+                {
+                    Console.WriteLine("Great! Let's proceed.");
+                    break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice. Please enter 1 or 2.");
+            }
+
+            Console.Clear();
+        } while (true);
+
+        Console.Clear();
+        Console.WriteLine("Welcome to the program! Enter mode: 1 - 'Client', 2 - 'Employee'");
+
+        return code;
+    }
+
+    static void MenuClients()
+    {
+        Console.WriteLine("\nWelcome to the Radiant Cow Steak House!");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("|            MAIN MENU                 |");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("|  APPETIZERS                          |");
+        Console.WriteLine("| 1. Beef Carpaccio         €15.00     |");
+        Console.WriteLine("| 2. Beef Tartare           €16.00     |");
+        Console.WriteLine("| 3. Mixed Bruschetta       €8.00      |");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("|  MAIN COURSES                        |");
+        Console.WriteLine("| 4. Tagliatelle with Ragù  €14.00     |");
+        Console.WriteLine("| 5. Mushroom Risotto       €13.00     |");
+        Console.WriteLine("| 6. Gnocchi with Gorgonzola €12.00    |");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("|  MEAT DISHES                         |");
+        Console.WriteLine("| 7. Ribeye Steak (300g)    €28.00     |");
+        Console.WriteLine("| 8. Filet (250g)           €32.00     |");
+        Console.WriteLine("| 9. T-Bone (500g)          €35.00     |");
+        Console.WriteLine("| 10. Tomahawk (800g)       €45.00     |");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("|  SIDES                              |");
+        Console.WriteLine("| 11. Roasted Potatoes      €5.00      |");
+        Console.WriteLine("| 12. Grilled Vegetables    €6.00      |");
+        Console.WriteLine("| 13. Mixed Salad           €4.00      |");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("|  DRINKS                             |");
+        Console.WriteLine("| 14. House Wine            €18.00     |");
+        Console.WriteLine("| 15. Craft Beer            €6.00      |");
+        Console.WriteLine("| 16. Mineral Water         €2.50      |");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("|  DESSERTS                          |");
+        Console.WriteLine("| 17. Tiramisu              €6.00      |");
+        Console.WriteLine("| 18. Panna Cotta           €5.00      |");
+        Console.WriteLine("| 19. Cheesecake            €6.00      |");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("|  AFTER MEAL                         |");
+        Console.WriteLine("| -1- Coffee              €1.00       |");
+        Console.WriteLine("| -2- Digestive           €4.00       |");
+        Console.WriteLine("----------------------------------------");
+
+        double total = 0;
+        while (true)
+        {
+            Console.Write("\nEnter the number of the dish you'd like to order (0 to finish): ");
+            if (int.TryParse(Console.ReadLine(), out int choice))
+            {
+                if (choice >= 1 && choice <= 19)
+                {
+                    Console.WriteLine($"You selected dish number {choice}");
+                }
+                else if (choice != 0 && choice != -1 && choice != -2)
+                {
+                    Console.WriteLine("Please select a valid number from the menu (1-19)");
+                }
+
+                if (choice == 1) total += 15;
+                if (choice == 2) total += 16;
+                if (choice == 3) total += 8;
+                if (choice == 4) total += 14;
+                if (choice == 5) total += 13;
+                if (choice == 6) total += 12;
+                if (choice == 7) total += 28;
+                if (choice == 8) total += 32;
+                if (choice == 9) total += 35;
+                if (choice == 10) total += 45;
+                if (choice == 11) total += 5;
+                if (choice == 12) total += 6;
+                if (choice == 13) total += 4;
+                if (choice == 14) total += 18;
+                if (choice == 15) total += 6;
+                if (choice == 16) total += 2.5;
+                if (choice == 17) total += 6;
+                if (choice == 18) total += 5;
+                if (choice == 19) total += 6;
+
+                if (choice == 0)
+                {
+                    Console.WriteLine("Thank you for ordering!");
+
+                    Console.WriteLine($"The total is €{total}");
+
+                    Console.Write("Would you like a coffee (-1-) or a digestive (-2-)? (any other number for no): ");
+                    if (int.TryParse(Console.ReadLine(), out int beverage))
+                    {
+                        if (beverage == 1)
+                        {
+
+                            Console.WriteLine("Ah, so you would like a coffee.");
+                            Random r = new Random();
+                            int freeFr = r.Next(0, 2);
+                            if (freeFr == 0)
+                            {
+                                Console.WriteLine("This coffee is offered by the house.");
+                            }
+                            else
+                            {
+                                total += 1;
+                                Console.WriteLine($"Okay, with the coffee the total is €{total}");
+                            }
+
+                        }
+                        else if (beverage == 2)
+                        {
+                            Console.WriteLine("Ah, so you would like a digestive.");
+                            Random r = new Random();
+                            int freeFr = r.Next(0, 2);
+                            if (freeFr == 0)
+                            {
+                                Console.WriteLine("This digestive is offered by the house.");
+                            }
+                            else
+                            {
+                                total += 4;
+                                Console.WriteLine($"Okay, with the digestive the total is €{total}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Nothing? Okay, the total is €{total}");
+                        }
+                    }
+                    break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid number.");
+            }
+        }
+    }
+
+    static int Tables()
+    {
+        Random rand = new Random();
+        return rand.Next(1, 22);
+    }
+
+    static int lastGeneratedCode = 0;
+
+    static int SelectRole(int code)
+    {
+        Console.WriteLine("Welcome to the program. Enter mode 1 - 'Client' or 2 - 'Employee'");
+        while (true)
+        {
+            string? choice = Console.ReadLine();
+
+            if (choice == "1")
+            {
+                int tableNumber = Tables();
+                Console.WriteLine("Welcome, client, to the Radiant Cow Steak House");
+                Console.WriteLine($"Please take a seat at table {tableNumber}");
+                Console.WriteLine("Here is the menu! Take your time to choose.");
+                MenuClients();
+            }
+            else if (choice == "2")
+            {
+                Console.WriteLine("Hi! Have I seen you somewhere before? (1 - Yes, 2 - No)");
+                string? seenBefore = Console.ReadLine();
+
+                if (seenBefore == "1")
+                {
+                    Console.WriteLine("Enter your code so I can confirm I know you.");
+                    if (int.TryParse(Console.ReadLine(), out int enteredCode))
+                    {
+                        if (enteredCode == code)
+                        {
+                            Random orario = new Random(), orarioM = new Random();
+                            int ora = orario.Next(0, 24);
+                            int min = orarioM.Next(0, 60);
+                            int orarioF = ora + 7;
+                            Console.WriteLine("Ohh, so you are known here!");
+                            Console.WriteLine($"You need to work from {ora}:{min} to {orarioF}:{min}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid code. Please try again or contact the manager.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a valid numeric code.");
+                    }
+                }
+                else if (seenBefore == "2")
+                {
+                    code = CodeCreate();
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice. Please enter 1 or 2.");
+            }
+        }
+    }
+}
